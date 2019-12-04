@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InstructorHome">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Back" />
+
+            <Button
+                android:id="@+id/createUserButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create User" />
+
+            <Button
+                android:id="@+id/createClassButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create Class" />
+
+            <Button
+                android:id="@+id/removeClassButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remove Class" />
+
+            <Button
+                android:id="@+id/createSessionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create Session" />
+
+            <Button
+                android:id="@+id/removeSessionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remove Session" />
+
+            <Button
+                android:id="@+id/startSessionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start Session" />
+
+            <Button
+                android:id="@+id/endSessionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="End Session" />
+
+            <Button
+                android:id="@+id/createQuestionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create Question" />
+
+            <Button
+                android:id="@+id/removeQuestionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remove Question" />
+
+            <Button
+                android:id="@+id/activateQuestionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Activate Question" />
+
+            <Button
+                android:id="@+id/deactivateQuestionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Deactivate Question" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Edit Text" />
+        </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
