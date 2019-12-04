@@ -1,9 +1,8 @@
 package edu.ucsb.cs.cs184.bdarnelluclickerstudent
 
-package edu.ucsb.cs.cs184.bdarnell.uclickerstudent.ui.login
-
 import android.content.Context
 import android.util.Log
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
@@ -15,33 +14,35 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.gson.Gson
 
 import java.io.Serializable
+import java.util.*
 
-/**
- * Created by Donghao Ren on 03/11/2017.
- * Modified by Ehsan Sayyad on 11/9/2018
- * Modified by Jake Guida on 11/6/2019
- */
+/*
+* Created by Donghao Ren on 03/11/2017.
+* Modified by Ehsan Sayyad on 11/9/2018
+* Modified by Jake Guida on 11/6/2019
+*/
 
-/**
- * This is a Firebase helper starter class we have created for you
- * In your Activity, FirebaseHelper.Initialize() is called to setup the Firebase
- * Put your application logic in OnDatabaseInitialized where you'll have the database object initialized
- */
+/*
+* This is a Firebase helper starter class we have created for you
+* In your Activity, FirebaseHelper.Initialize() is called to setup the Firebase
+* Put your application logic in OnDatabaseInitialized where you'll have the database object initialized
+*/
 val FIREBASE_URL = "https://uclicker-1121a.firebaseio.com/"
-val API_KEY = "AIzaSyBEqMXOi5m0N178WNLf9oGkJLEvoFxeJmg "
+val API_KEY = "AIzaSyBMtCNVCaa4cen85MNXLeWeWceNbTWcrkg\n "
 val APP_ID = "UClicker"
 
+
+
 object DatabaseHelper {
-
-    /** Keep track of initialized state, so we don't initialize multiple times  */
+    /* Keep track of initialized state, so we don't initialize multiple times  */
     private var initialized = false
-
-    /** The Firebase database object  */
+    private lateinit var email:String
+    /* The Firebase database object  */
     private lateinit var db: FirebaseDatabase
     private lateinit var db_ref: DatabaseReference
     private var gson: Gson = Gson()
 
-    /** This is a message data structure that mirrors our Firebase data structure for your convenience  */
+    / This is a message data structure that mirrors our Firebase data structure for your convenience  */
     /*class Post(
         var longitude: Double = 0.0,
         var latitude: Double = 0.0,
@@ -49,7 +50,7 @@ object DatabaseHelper {
         var timestamp: Double = 0.0
     ) : Serializable*/
 
-    /** Initialize the firebase instance  */
+    / Initialize the firebase instance  */
     fun initialize(context: Context) {
         if (!initialized) {
             initialized = true
@@ -62,64 +63,41 @@ object DatabaseHelper {
             )
 
             // Call the OnDatabaseInitialized to setup application logic
-            onDatabaseInitialized()
+            db_ref = db.reference
         }
     }
 
-    /** This is called once we initialize the firebase database object  */
-    private fun onDatabaseInitialized() {
-        db = FirebaseDatabase.getInstance(FIREBASE_URL)
-        db_ref = db.getReference("posts")
-        db_ref.addChildEventListener(object: ChildEventListener {
-
-            override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String?) {
-                if (mapsHelper != null)
-                    mapsHelper!!.onPostAdded(gson.fromJson(dataSnapshot.value.toString(), Post::class.java))
-            }
-
-            override fun onChildChanged(dataSnapshot: DataSnapshot, p1: String?) {
-                if (mapsHelper != null)
-                    mapsHelper!!.onPostChanged(gson.fromJson(dataSnapshot.value.toString(), Post::class.java))
-            }
-
-            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
-                if (mapsHelper != null)
-                    mapsHelper!!.onPostRemoved(gson.fromJson(dataSnapshot.value.toString(), Post::class.java))
-            }
-
-            override fun onCancelled(dataSnapshot: DatabaseError) {}
-
-            override fun onChildMoved(dataSnapshot: DataSnapshot, p1: String?) {}
-
-        })
-        // TODO: Setup your callbacks to listen for /posts.
-        // Your code should handle post added, post updated, and post deleted events.
-        // An image can be identified by its title, an integer between 0 and 9, which corresponds to the resource file name
-
+    fun setEmail(_email: String) {
+        email = _email
     }
 
-    fun createClass() {
-
+    fun createUser() {
+        db_ref.child(email).push()
     }
 
-    fun removeClass() {
-
+    fun createClass(classId: Int) {
+        db_ref.child(email).child(classId.toString()).push()
     }
 
-    fun createSession() {
-
+    fun removeClass(classId: Int) {
+        db_ref.child(email).child(classId.toString()).removeValue()
     }
 
-    fun removeSession() {
+    fun createSession(classId: Int) {
+        var uniqueID = UUID.randomUUID().toString()
+        db_ref.child(email).child(classId.toString()).child(uniqueID)
+    }
 
+    fun removeSession(UUID: String) {
+        db_ref.child(email)
     }
 
     fun startSession() {
-
+        db_ref
     }
 
     fun endSession() {
-
+        db_ref
     }
 
     fun createQuestion() {
@@ -149,5 +127,6 @@ object DatabaseHelper {
     fun sendResponse() {
 
     }
+
 
 }
