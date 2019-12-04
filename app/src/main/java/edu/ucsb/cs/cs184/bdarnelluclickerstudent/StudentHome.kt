@@ -15,6 +15,11 @@ class StudentHome : AppCompatActivity() {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
+
+        getActiveQuestionButton.setOnClickListener {
+            val intent = Intent(this, MultipleChoice::class.java)
+            startActivity(intent)
+        }
     }
 
 }

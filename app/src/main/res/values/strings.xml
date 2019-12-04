@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">bdarnell.uclickerstudent</string>
     <string name="title_activity_multiple_choice">MultipleChoice</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>
