@@ -2,10 +2,9 @@ package edu.ucsb.cs.cs184.bdarnelluclickerstudent
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,5 +18,11 @@ class MainActivity : AppCompatActivity() {
                 .build()
         var mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         var account = GoogleSignIn.getLastSignedInAccount(this)
+        sign_in_button.setOnClickListener {
+            val signInIntent = mGoogleSignInClient.signInIntent
+            startActivityForResult(signInIntent, 1)
+
+        }
+
     }
 }
